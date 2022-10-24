@@ -1,6 +1,5 @@
 import Exceptions.FileIsNotDirectoryException;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 
 /**
@@ -10,10 +9,14 @@ import java.io.FileNotFoundException;
  */
 public class Application {
     public static void main(String[] args) {
-        final String fileName = "D:\\Paul\\Programming\\Java\\asd";
+        final String fileName = "D:\\Paul\\Programming\\Java\\";
+        if (args.length != 1) {
+            System.out.println("Your the only one argument should be the directory name.");
+            return;
+        }
         DirectoryInfo directoryInfo;
         try {
-            directoryInfo = new DirectoryInfo(fileName);
+            directoryInfo = new DirectoryInfo(args[0]);
         } catch (FileIsNotDirectoryException | FileNotFoundException exception) {
             System.out.println(exception.getMessage());
             return;
@@ -26,6 +29,6 @@ public class Application {
         final long directorySizeGB = directorySizeMB / 1024;
 
         System.out.println("Size of " + fileName + " is: " + directorySizeBytes + " bytes / " + directorySizeKB
-                + " Kb / " + + directorySizeMB + "Mb / " + directorySizeGB + " Gb.");
+                + " Kb / " + directorySizeMB + "Mb / " + directorySizeGB + " Gb.");
     }
 }
