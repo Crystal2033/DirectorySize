@@ -32,10 +32,8 @@ public class DirectoryInfo {
             for (File file : files) {
                 if (file.isFile()) {
                     length += file.length();
-                } else if (file.isDirectory()) {
-                    length += getDirectorySize(file);
                 } else {
-                    System.out.println("Something is wrong.");
+                    length += getDirectorySize(file);
                 }
             }
         }
