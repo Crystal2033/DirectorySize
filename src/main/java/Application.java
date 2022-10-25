@@ -1,5 +1,7 @@
 import Exceptions.FileIsNotDirectoryException;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 
 /**
@@ -30,5 +32,6 @@ public class Application {
 
         System.out.println("Size of " + fileName + " is: " + directorySizeBytes + " bytes / " + directorySizeKB
                 + " Kb / " + directorySizeMB + "Mb / " + directorySizeGB + " Gb.");
+
     }
 }
