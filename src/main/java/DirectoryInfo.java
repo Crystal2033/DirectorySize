@@ -2,6 +2,10 @@ import Exceptions.FileIsNotDirectoryException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * @project DirectorySize
@@ -10,6 +14,7 @@ import java.io.FileNotFoundException;
  */
 public class DirectoryInfo {
     private final File file;
+    private final ExecutorService executorService;
 
     DirectoryInfo(String fileName) throws FileIsNotDirectoryException, FileNotFoundException {
         this.file = new File(fileName);
@@ -19,13 +24,16 @@ public class DirectoryInfo {
         if (!file.isDirectory()) {
             throw new FileIsNotDirectoryException(fileName + " is not directory.");
         }
+        executorService = Executors.newCachedThreadPool();
     }
 
-    public long getDirectorySize() {
-        return getDirectorySize(file);
+    public long getDirectorySize() throws ExecutionException, InterruptedException {
+        long dirSize = getDirectorySize(file);
+        executorService.shutdown();
+        return dirSize;
     }
 
-    private long getDirectorySize(File dir) {
+    long getDirectorySize(File dir) throws ExecutionException, InterruptedException {
         long length = 0;
         File[] files = dir.listFiles();
         if (files != null) {
@@ -33,7 +41,9 @@ public class DirectoryInfo {
                 if (file.isFile()) {
                     length += file.length();
                 } else {
-                    length += getDirectorySize(file);
+                    //length += getDirectorySize(file);
+                    Future<Long> resultOfGetDirSize = executorService.submit(new DirectoryThread(this, file));
+                    length += resultOfGetDirSize.get();
                 }
             }
         }

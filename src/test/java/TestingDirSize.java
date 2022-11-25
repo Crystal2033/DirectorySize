@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.concurrent.ExecutionException;
 
 /**
  * @project DirectorySize
@@ -38,7 +39,7 @@ public class TestingDirSize {
     class CorrectnessOfDirSizeValue{
         @Test
         @DisplayName("checkCorrectnessOfDirSize")
-        void checkCorrectnessOfDirSize() throws FileIsNotDirectoryException, FileNotFoundException {
+        void checkCorrectnessOfDirSize() throws FileIsNotDirectoryException, FileNotFoundException, ExecutionException, InterruptedException {
             DirectoryInfo directoryInfo = new DirectoryInfo(PATH);
             Assertions.assertEquals(FileUtils.sizeOfDirectory(new File(PATH)), directoryInfo.getDirectorySize());
 
@@ -53,7 +54,7 @@ public class TestingDirSize {
 
         @Test
         @DisplayName("wrongSizeChecking")
-        void wrongSizeChecking() throws FileIsNotDirectoryException, FileNotFoundException {
+        void wrongSizeChecking() throws FileIsNotDirectoryException, FileNotFoundException, ExecutionException, InterruptedException {
             DirectoryInfo directoryInfo = new DirectoryInfo(PATH);
             Assertions.assertNotEquals(FileUtils.sizeOfDirectory(new File("D:\\Paul\\Programming\\Books")), directoryInfo.getDirectorySize());
         }
