@@ -8,7 +8,6 @@ import java.util.concurrent.Callable;
  */
 public record DirectoryThread(DirectoryInfo directoryInfo, File curFile) implements Callable<Long> {
 
-
     @Override
     public Long call() throws Exception {
         return directoryInfo.getDirectorySize(curFile);
