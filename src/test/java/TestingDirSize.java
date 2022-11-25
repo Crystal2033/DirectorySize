@@ -19,24 +19,24 @@ public class TestingDirSize {
 
     @Nested
     @DisplayName("Exceptions testing")
-    class DirSizeExceptionsTest{
+    class DirSizeExceptionsTest {
         @Test
         @DisplayName("Existence of file")
         void existenceOfFile() {
-            Assertions.assertThrowsExactly(FileNotFoundException.class, ()->new DirectoryInfo(PATH + "ASD"));
-            Assertions.assertThrowsExactly(FileNotFoundException.class, ()->new DirectoryInfo(PATH + "RPKS123"));
-            Assertions.assertThrowsExactly(FileNotFoundException.class, ()->new DirectoryInfo(PATH + "ASD"));
+            Assertions.assertThrowsExactly(FileNotFoundException.class, () -> new DirectoryInfo(PATH + "ASD"));
+            Assertions.assertThrowsExactly(FileNotFoundException.class, () -> new DirectoryInfo(PATH + "RPKS123"));
+            Assertions.assertThrowsExactly(FileNotFoundException.class, () -> new DirectoryInfo(PATH + "ASD"));
         }
 
         @Test
         @DisplayName("Check file is not directory exception")
         void checkFileIsNotDirectoryException() {
-            Assertions.assertThrowsExactly(FileIsNotDirectoryException.class, ()->new DirectoryInfo(PATH + "auction_test.iml"));
+            Assertions.assertThrowsExactly(FileIsNotDirectoryException.class, () -> new DirectoryInfo(PATH + "auction_test.iml"));
         }
     }
 
     @Nested
-    class CorrectnessOfDirSizeValue{
+    class CorrectnessOfDirSizeValue {
         @Test
         @DisplayName("checkCorrectnessOfDirSize")
         void checkCorrectnessOfDirSize() throws FileIsNotDirectoryException, FileNotFoundException, ExecutionException, InterruptedException {

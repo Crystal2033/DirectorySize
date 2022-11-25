@@ -29,7 +29,7 @@ public class Application {
 
         System.out.println("Processing... Wait a bit.");
         long directorySizeBytes = 0L;
-        try{
+        try {
             directorySizeBytes = directoryInfo.getDirectorySize();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();

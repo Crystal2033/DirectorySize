@@ -41,7 +41,6 @@ public class DirectoryInfo {
                 if (file.isFile()) {
                     length += file.length();
                 } else {
-                    //length += getDirectorySize(file);
                     Future<Long> resultOfGetDirSize = executorService.submit(new DirectoryThread(this, file));
                     length += resultOfGetDirSize.get();
                 }
